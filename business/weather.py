@@ -1,4 +1,5 @@
 import requests
+from loguru import logger
 from config import URL, CITY
 
 
@@ -8,7 +9,10 @@ def get_weather(places: list):
     }
     temp_list = []
     for place in places:
-        temp_list.append(requests.get(f"{URL}/{place}", params=params).text)
+        req = requests.get(f"{URL}/{place}", params=params)
+        if req.status_code == 200:
+            temp_list.append(req.text)
+        logger.error(f'Не удалось получить данные с сервера, т.к. код ответа сервера {req.status_code}')
     return temp_list
 
 
