@@ -3,6 +3,8 @@ import requests
 
 URL='https://wttr.in'
 PLACES = ['Лондон', 'Череповец', 'SVO']
+
+
 def get_weather(places: list):
     params = {
         'lang': 'ru',
@@ -26,5 +28,6 @@ def main():
     for weather in weathers:
         print(weather)
 
+        
 if __name__=="__main__":
     main()
